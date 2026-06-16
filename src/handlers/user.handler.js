@@ -23,8 +23,8 @@ const getUserByRoll = (req, res) => {
     res.json(user)
 }
 
-const createProduct = (req, res) => {
-    const { name, price} = req.body;
-    const user = productService.createUser(name, price);
-    res.status(201).json(user);
+module.exports = {
+    getUsers,
+    createUser,
+    getUserByRoll,
 }
