@@ -1,16 +1,27 @@
 {
-  "name": "crud",
+  "name": "app",
   "version": "1.0.0",
-  "description": "npm init   -- to initalise the application npm install express  -- to install express",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "node app.js"
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhiram-vattikonda/MERN_Stack_Placement_Training.git"
+  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^5.2.1"
+  "bugs": {
+    "url": "https://github.com/abhiram-vattikonda/MERN_Stack_Placement_Training/issues"
   },
-  "devDependencies": {},
-  "keywords": []
+  "homepage": "https://github.com/abhiram-vattikonda/MERN_Stack_Placement_Training#readme",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^5.2.1",
+    "mongodb": "^7.3.0"
+  }
 }

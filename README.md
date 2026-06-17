@@ -1,2 +1,5 @@
-npm init   -- to initalise the application
-npm install express  -- to install express
+
+npm init -y
+
+
+npm i express mongodb

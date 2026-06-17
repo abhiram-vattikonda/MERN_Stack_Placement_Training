@@ -1,30 +1,87 @@
-const users = require("../models/user.models")
-const userService = require("../services/user.services")
+const userService = require("../services/user.service");
 
-const getUsers = (req, res) => {
-    const users = userService.getAllUsers();
-    res.json(users);
+const createUser = async (req, res) => {
+    try {
+        const user = await userService.createUser(req.body);
+        res.status(201).json({
+            success: true,
+            data: user,
+        });
+    } catch (error) {
+        console.error("CREATE USER ERROR:", error.stack);
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+    }
 };
 
-const createUser = (req, res) => {
-    const { roll, name, email} = req.body;
-    const user = userService.createUser(roll, name, email);
-    res.status(201).json(user);
-}
-
-
-const getUserByRoll = (req, res) => {
-    const user = userService.getUserByRoll(req.params.roll)
-
-    if (!user) {
-        return res.status(404).json({message : "User Not Found"})
+const getAllUsers = async (req, res) => {
+    console.log("HANDLER REACHED: getAllUsers");
+    try {
+        const users = await userService.getAllUsers();
+        res.status(200).json({
+            success: true,
+            data: users,
+        });
+    } catch (error) {
+        console.error("GET ALL USERS ERROR:", error.stack);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
     }
+};
 
-    res.json(user)
-}
+const getUserByID = async (req, res) => {
+    try {
+        const user = await userService.getUserByID(req.params.id);
+        res.status(200).json({
+            success: true,
+            data: user,
+        });
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+const updateUser = async (req, res) => {
+    try {
+        const result = await userService.updateUser(req.params.id, req.body);
+        res.status(200).json({
+            success: true,
+            data: result,
+        });
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+const deleteUser = async (req, res) => {
+    try {
+        const result = await userService.deleteUser(req.params.id);
+        res.status(200).json({
+            success: true,
+            data: result,
+        });
+    } catch (error) {
+        res.status(404).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
 
 module.exports = {
-    getUsers,
     createUser,
-    getUserByRoll,
-}
+    getAllUsers,
+    getUserByID,
+    updateUser,
+    deleteUser,
+};
